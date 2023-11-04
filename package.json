@@ -7,13 +7,13 @@
     "scripts": {
         "dev": "serverless offline --reloadHandler",
         "clean": "rimraf .build .webpack",
-        "deploy:prod": "pnpm clean && sls deploy --stage=production",
-        "deploy": "pnpm clean && sls deploy",
+        "deploy:prod": "pnpm clean && sls deploy",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
+        "@aws-sdk/client-lambda": "^3.441.0",
         "@vendia/serverless-express": "^4.10.4",
-        "aws-lambda": "^1.0.6",
+        "aws-lambda": "^1.0.7",
         "body-parser": "^1.20.0",
         "cors": "^2.8.5",
         "crypto": "^1.0.1",
@@ -27,7 +27,7 @@
     },
     "devDependencies": {
         "@serverless/typescript": "^3.30.1",
-        "@types/aws-lambda": "^8.10.17",
+        "@types/aws-lambda": "^8.10.125",
         "@types/cors": "^2.8.12",
         "@types/node": "^10.14.22",
         "esbuild": "^0.19.5",
