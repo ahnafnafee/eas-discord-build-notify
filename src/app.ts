@@ -3,6 +3,7 @@ import cors from "cors";
 import crypto from "crypto";
 import { EmbedBuilder } from "discord.js";
 import express, { Request, Response } from "express";
+import safeCompare from "safe-compare";
 import { channel, clientReadyPromise } from "./discord";
 import { BuildPayload, SubmitPayload } from "./types";
 import { BuildEmbed as DiscordEmbedBuilder, validatedEnv } from "./utils";
@@ -31,10 +32,10 @@ app.post("/webhook", async (req: Request, res: Response) => {
         hmac.update(req.body);
         const hash = `sha1=${hmac.digest("hex")}`;
 
-        // if (!safeCompare(expoSignature, hash)) {
-        //     res.status(401).send("Signatures didn't match");
-        //     return;
-        // }
+        if (!safeCompare(expoSignature, hash)) {
+            res.status(401).send("Signatures didn't match");
+            return;
+        }
 
         const payload = JSON.parse(req.body) as SubmitPayload | BuildPayload;
 

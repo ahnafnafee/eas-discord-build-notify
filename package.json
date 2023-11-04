@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "serverless offline --reloadHandler",
         "clean": "rimraf .build .webpack",
-        "deploy:prod": "pnpm clean && sls deploy",
+        "deploy:prod": "pnpm clean && serverless deploy --org ahnafnafee --app eas-discord-webhook",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
