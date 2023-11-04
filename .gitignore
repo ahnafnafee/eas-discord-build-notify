@@ -107,3 +107,4 @@ dist/
 .webpack/
 .build/
 .vscode/
+.warmup/

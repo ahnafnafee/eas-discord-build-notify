@@ -3,14 +3,13 @@ import type { AWS } from "@serverless/typescript";
 const serverlessConfiguration: AWS = {
     service: "eas-discord-webhook",
     frameworkVersion: "3",
-    org: "ahnafnafee",
-    app: "eas-discord-webhook",
     console: true,
     useDotenv: true,
     plugins: [
         "serverless-esbuild",
         "serverless-offline",
         "serverless-dotenv-plugin",
+        "serverless-better-credentials",
         "serverless-plugin-warmup",
         "serverless-plugin-optimize",
     ],
@@ -50,19 +49,18 @@ const serverlessConfiguration: AWS = {
             httpPort: 33031,
         },
         warmup: {
-            default: {
+            easBuildWebhook: {
                 enabled: true,
                 role: "IamRoleLambdaExecution",
                 architecture: "arm64",
+                events: [
+                    {
+                        schedule: "rate(5 minutes)",
+                    },
+                ],
+                prewarm: true,
+                concurrency: 1,
             },
-            enabled: true,
-            events: [
-                {
-                    schedule: "rate(5 minutes)",
-                },
-            ],
-            prewarm: true,
-            concurrency: 1,
         },
     },
     package: {
@@ -75,7 +73,7 @@ const serverlessConfiguration: AWS = {
         ],
     },
     functions: {
-        "eas-build-webhook": {
+        easBuildWebhook: {
             handler: "handler.handler",
             events: [
                 {
