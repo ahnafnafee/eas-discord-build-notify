@@ -66,7 +66,6 @@ const serverlessConfiguration: AWS = {
         },
     },
     package: {
-        individually: true,
         patterns: [
             "!.git/**",
             "!.gh-assets/**",
