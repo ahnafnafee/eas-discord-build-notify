@@ -1,25 +1,51 @@
 {
     "name": "eas-build-discord-notify",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Notifies EAS Builds using Discord Bots",
-    "main": "index.js",
-    "scripts": {
-        "dev": "node index.js"
-    },
-    "author": "",
     "license": "MIT",
+    "main": "serverless.ts",
+    "scripts": {
+        "dev": "serverless offline --reloadHandler",
+        "clean": "rimraf .build .webpack",
+        "deploy:prod": "pnpm clean && serverless deploy --org ahnafnafee --app eas-discord-webhook",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
     "dependencies": {
-        "@vendia/serverless-express": "^4.5.4",
+        "@aws-sdk/client-lambda": "^3.441.0",
+        "@vendia/serverless-express": "^4.10.4",
+        "aws-lambda": "^1.0.7",
         "body-parser": "^1.20.0",
+        "cors": "^2.8.5",
         "crypto": "^1.0.1",
         "discord.js": "^14.2.0",
         "dotenv": "^16.0.1",
         "express": "^4.17.3",
         "qrcode": "^1.5.0",
         "safe-compare": "^1.1.4",
-        "stream": "^0.0.2"
+        "stream": "^0.0.2",
+        "zod": "^3.22.4"
     },
     "devDependencies": {
-        "serverless-dotenv-plugin": "^4.0.2"
+        "@serverless/typescript": "^3.30.1",
+        "@types/aws-lambda": "^8.10.125",
+        "@types/cors": "^2.8.12",
+        "@types/node": "^10.14.22",
+        "esbuild": "^0.19.5",
+        "eslint": "^6.6.0",
+        "rimraf": "^5.0.5",
+        "serverless": "^3.0.0",
+        "serverless-better-credentials": "^2.0.0",
+        "serverless-dotenv-plugin": "^4.0.2",
+        "serverless-esbuild": "^1.48.5",
+        "serverless-offline": "^13.2.0",
+        "serverless-plugin-optimize": "4.2.1-rc.1",
+        "serverless-plugin-typescript": "^1.1.9",
+        "serverless-plugin-warmup": "^7.3.0",
+        "ts-loader": "^5.3.3",
+        "ts-node": "^10.4.0",
+        "tsconfig-paths": "^3.9.0",
+        "tslint": "^5.20.0",
+        "tslint-config-airbnb": "^5.11.2",
+        "typescript": "^3.2.4"
     }
 }

@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+        "lib": ["esnext"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "lib",
+        "sourceMap": true,
+        "target": "esnext",
+        "rootDir": "./"
+    },
+    "include": ["src/**/*", "handler.ts"],
+    "exclude": [
+        "node_modules/**/*",
+        ".serverless/**/*",
+        ".webpack/**/*",
+        ".vscode/**/*",
+        "__test__",
+        ".build"
+    ]
+}
