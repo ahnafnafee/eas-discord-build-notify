@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-    A <strong>serverless</strong> lambda to notify the result of EAS build. 
+    A <strong>serverless</strong> lambda to notify the result of EAS build.
 </p>
 <p align="center">
     <a href="https://www.serverless.com/">
@@ -23,17 +23,26 @@
         > Needs the following bot permissions: `Read Messages/View Channels`, `Send Messages`, `Embed Links`, `Attach Files`, `Use External Emojis` [optional], `Add Reactions` [optional]
     2. Invite bot to server (_make sure the bot has proper permissions in your desired channel_)
     3. Create [Serverless Account](https://app.serverless.com).
-    4. Further edit `serverless.yml` if needed to set your desired AWS region, etc.
+    4. Further edit `serverless.ts` if needed to set your desired AWS region, etc.
     5. Create a `.env` file and put it in the root directory. It should be in the following format:
+
         ```
         EAS_SECRET_WEBHOOK_KEY =
         DISCORD_BOT_TOKEN =
         DISCORD_CHANNEL_ID =
         ```
-    6. Deploy as Serverless App
+
+    6. Test locally by running:
+
+        ```bash
+        pnpm dev
+        ```
+
+    7. Deploy as Serverless App
+
         ```bash
         npm i -g serverless
-        npm i
+        pnpm i
         serverless --org=[username] # replace [username] with your Serverless org name
         serverless deploy # use if you did not deploy from previous command
         ```
@@ -55,6 +64,7 @@
 ## License
 
 -   [MIT © 2022 Ahnaf An Nafee](https://github.com/ahnafnafee/eas-discord-build-notify/blob/master/LICENSE)
+-   [MIT © 2023 tonightpass](https://github.com/tonightpass/eas-discord-build-notify/blob/main/LICENSE)
 -   [MIT © 2021 ryo kishida](https://github.com/ryo-rm/eas-slack-build-notify/blob/main/LICENSE)
 
 <details>
