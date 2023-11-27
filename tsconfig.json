@@ -12,7 +12,7 @@
         "target": "esnext",
         "rootDir": "./"
     },
-    "include": ["src/**/*", "handler.ts"],
+    "include": ["src/**/*.ts", "serverless.ts"],
     "exclude": [
         "node_modules/**/*",
         ".serverless/**/*",

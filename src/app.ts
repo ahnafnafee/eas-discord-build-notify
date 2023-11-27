@@ -1,5 +1,4 @@
 import bodyParser from "body-parser";
-import cors from "cors";
 import crypto from "crypto";
 import { EmbedBuilder } from "discord.js";
 import express, { Request, Response } from "express";
@@ -11,12 +10,6 @@ import { BuildEmbed as DiscordEmbedBuilder, validatedEnv } from "./utils";
 // Express Setup
 const app = express();
 app.use(bodyParser.text({ type: "*/*" }));
-app.use(express.urlencoded({ extended: true }));
-app.use(
-    cors({
-        origin: "*",
-    })
-);
 
 app.post("/webhook", async (req: Request, res: Response) => {
     await clientReadyPromise;

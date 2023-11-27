@@ -6,16 +6,16 @@
     "main": "serverless.ts",
     "scripts": {
         "dev": "serverless offline --reloadHandler",
-        "clean": "rimraf .build .webpack",
-        "deploy:prod": "pnpm clean && serverless deploy --org ahnafnafee --app eas-discord-webhook",
+        "clean": "rimraf .build .webpack .esbuild .warmup",
+        "doctor": "serverless doctor",
+        "deploy:prod": "pnpm clean && serverless deploy --app eas-discord-webhook",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "@aws-sdk/client-lambda": "^3.441.0",
+        
         "@vendia/serverless-express": "^4.10.4",
         "aws-lambda": "^1.0.7",
         "body-parser": "^1.20.0",
-        "cors": "^2.8.5",
         "crypto": "^1.0.1",
         "discord.js": "^14.2.0",
         "dotenv": "^16.0.1",
@@ -26,6 +26,7 @@
         "zod": "^3.22.4"
     },
     "devDependencies": {
+        "@aws-sdk/client-lambda": "^3.441.0",
         "@serverless/typescript": "^3.30.1",
         "@types/aws-lambda": "^8.10.125",
         "@types/cors": "^2.8.12",

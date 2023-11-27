@@ -3,7 +3,6 @@ import type { AWS } from "@serverless/typescript";
 const serverlessConfiguration: AWS = {
     service: "eas-discord-webhook",
     frameworkVersion: "3",
-    console: true,
     useDotenv: true,
     plugins: [
         "serverless-esbuild",
@@ -22,13 +21,18 @@ const serverlessConfiguration: AWS = {
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
             NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
         },
-        iamRoleStatements: [
-            {
-                Effect: "Allow",
-                Action: ["lambda:InvokeFunction"],
-                Resource: ["*"],
+
+        iam: {
+            role: {
+                statements: [
+                    {
+                        Effect: "Allow",
+                        Action: ["lambda:InvokeFunction"],
+                        Resource: ["*"],
+                    },
+                ],
             },
-        ],
+        },
     },
     custom: {
         webpack: {
@@ -40,7 +44,7 @@ const serverlessConfiguration: AWS = {
             minify: false,
             sourcemap: true,
             target: "node16",
-            exclude: ["aws-sdk"], // AWS SDK is not needed since it's available in the AWS environment
+            exclude: ["aws-sdk", "@aws-sdk/client-lambda"],
             define: { "require.resolve": undefined },
             platform: "node",
             concurrency: 10,
@@ -49,21 +53,24 @@ const serverlessConfiguration: AWS = {
             httpPort: 33031,
         },
         warmup: {
-            easBuildWebhook: {
+            default: {
                 enabled: true,
                 role: "IamRoleLambdaExecution",
-                architecture: "arm64",
+                verbose: false, // Disable the logs
+                logRetentionInDays: 7,
                 events: [
                     {
                         schedule: "rate(5 minutes)",
                     },
                 ],
+                cleanFolder: false,
+                architecture: "arm64",
                 prewarm: true,
-                concurrency: 1,
             },
         },
     },
     package: {
+        individually: true,
         patterns: [
             "!.git/**",
             "!.gh-assets/**",
@@ -76,12 +83,8 @@ const serverlessConfiguration: AWS = {
         easBuildWebhook: {
             handler: "handler.handler",
             events: [
-                {
-                    http: "ANY /",
-                },
-                {
-                    http: "ANY /{proxy+}",
-                },
+                { http: { path: "/", method: "any", cors: true } },
+                { http: { path: "/{proxy+}", method: "any", cors: true } },
             ],
         },
     },
