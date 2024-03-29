@@ -19,7 +19,7 @@
         "crypto": "^1.0.1",
         "discord.js": "^14.14.1",
         "dotenv": "^16.0.1",
-        "express": "^4.17.3",
+        "express": "^4.19.2",
         "qrcode": "^1.5.0",
         "safe-compare": "^1.1.4",
         "stream": "^0.0.2",
